@@ -15,4 +15,8 @@
         <button type="button" id="sendBtn">Send</button>
     </div>
 
+    <script>
+        const socket = new WebSocket("ws://{{ websocket_url }}:{{ websocket_port }}");
+    </script>
+
 {% endblock %}

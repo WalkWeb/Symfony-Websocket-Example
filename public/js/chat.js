@@ -1,6 +1,4 @@
 
-const socket = new WebSocket("ws://symfony-websocket.loc:3001");
-
 socket.addEventListener("open", function() {
     console.log("CONNECTED");
 });

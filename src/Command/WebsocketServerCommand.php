@@ -14,12 +14,23 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class WebsocketServerCommand extends Command
 {
+    private const RUN_MESSAGE = 'Starting server on port ';
     protected static $defaultName = 'run:websocket-server';
+
+    /**
+     * @var int
+     */
+    private $websocketPort;
+
+    public function __construct(int $websocketPort)
+    {
+        parent::__construct();
+        $this->websocketPort = $websocketPort;
+    }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $port = 3001;
-        $output->writeln("Starting server on port " . $port);
+        $output->writeln(self::RUN_MESSAGE . $this->websocketPort);
 
         $server = IoServer::factory(
             new HttpServer(
@@ -27,7 +38,7 @@ class WebsocketServerCommand extends Command
                     new MessageHandler()
                 )
             ),
-            $port
+            $this->websocketPort
         );
 
         $server->run();
