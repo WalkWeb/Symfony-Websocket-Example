@@ -16,7 +16,9 @@
     </div>
 
     <script>
-        const socket = new WebSocket("ws://{{ websocket_url }}:{{ websocket_port }}");
+        const socket = new WebSocket("ws://{{ websocket_host }}:{{ websocket_port }}");
     </script>
+
+    <script src="{{ asset('js/chat.js') }}"></script>
 
 {% endblock %}

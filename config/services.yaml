@@ -19,5 +19,5 @@ services:
 
     App\Controller\WebsocketController:
         arguments:
-            $websocketUrl: '%env(resolve:WEBSOCKET_URL)%'
+            $websocketHost: '%env(resolve:WEBSOCKET_HOST)%'
             $websocketPort: '%env(resolve:WEBSOCKET_PORT)%'

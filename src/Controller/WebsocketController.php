@@ -11,16 +11,16 @@ class WebsocketController extends AbstractController
     /**
      * @var string
      */
-    private $websocketUrl;
+    private $websocketHost;
 
     /**
      * @var int
      */
     private $websocketPort;
 
-    public function __construct(string $websocketUrl, int $websocketPort)
+    public function __construct(string $websocketHost, int $websocketPort)
     {
-        $this->websocketUrl = $websocketUrl;
+        $this->websocketHost = $websocketHost;
         $this->websocketPort = $websocketPort;
     }
 
@@ -30,7 +30,7 @@ class WebsocketController extends AbstractController
     public function index(): Response
     {
         return $this->render('websocket/index.html.twig', [
-            'websocket_url'  => $this->websocketUrl,
+            'websocket_host' => $this->websocketHost,
             'websocket_port' => $this->websocketPort,
         ]);
     }
