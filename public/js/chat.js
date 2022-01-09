@@ -10,23 +10,23 @@ function addMessage(name, message) {
 
 socket.addEventListener("message", function(e) {
     console.log(e.data);
-    try
-    {
+    try {
         const message = JSON.parse(e.data);
         addMessage(message.name, message.message);
-    }
-    catch(e)
-    {
+    } catch(e) {
         // Catch any errors
     }
 });
 
 document.getElementById("sendBtn").addEventListener("click", function() {
 
-    const message = {
+    let message = document.getElementById("message");
+
+    const data = {
         name: document.getElementById("name").value,
-        message: document.getElementById("message").value
+        message: message.value
     };
-    socket.send(JSON.stringify(message));
-    addMessage(message.name, message.message);
+    socket.send(JSON.stringify(data));
+    addMessage(data.name, data.message);
+    message.value = '';
 });

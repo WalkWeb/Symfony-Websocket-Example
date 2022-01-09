@@ -11,39 +11,37 @@ use SplObjectStorage;
 
 class MessageHandler implements MessageComponentInterface
 {
-    protected $connections;
+    protected $clients;
 
     public function __construct()
     {
-        $this->connections = new SplObjectStorage;
+        $this->clients = new SplObjectStorage;
     }
 
     public function onOpen(ConnectionInterface $conn): void
     {
-        $this->connections->attach($conn);
+        $this->clients->attach($conn);
     }
 
     public function onMessage(ConnectionInterface $from, $msg): void
     {
-        foreach($this->connections as $connection)
-        {
-            if($connection === $from)
-            {
+        foreach($this->clients as $client) {
+            if($client === $from) {
                 continue;
             }
 
-            $connection->send($msg);
+            $client->send($msg);
         }
     }
 
     public function onClose(ConnectionInterface $conn): void
     {
-        $this->connections->detach($conn);
+        $this->clients->detach($conn);
     }
 
     public function onError(ConnectionInterface $conn, Exception $e): void
     {
-        $this->connections->detach($conn);
+        $this->clients->detach($conn);
         $conn->close();
     }
 }
