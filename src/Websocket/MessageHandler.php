@@ -25,8 +25,8 @@ class MessageHandler implements MessageComponentInterface
 
     public function onMessage(ConnectionInterface $from, $msg): void
     {
-        foreach($this->clients as $client) {
-            if($client === $from) {
+        foreach ($this->clients as $client) {
+            if ($client === $from) {
                 continue;
             }
 
